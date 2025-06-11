@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Importancia | Sistema de Reportes Verdes</title>
+    <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+    <header class="navbar">
+        <div class="navbar-title">
+            <span class="icon">🤍</span>
+            <span><strong>Sistema de Reportes Verdes</strong></span>
+        </div>
+        <span class="navbar-toggle" id="navbar-toggle">&#9776;</span>
+        <nav class="navbar-menu" id="navbar-menu">
+            <a href="index.html">Inicio</a>
+            <a href="reporte.html">Reportar</a>
+            <a href="estadisticas.html">Estadísticas</a>
+            <a href="importancia.html">Importancia</a>
+        </nav>
+    </header>
+    <main class="main-content">
+        <section class="importancia-section">
+            <h2 class="main-title">¿Por qué es importante cuidar el medio ambiente?</h2>
+            <p class="main-description">
+                Descubre por qué nuestras acciones diarias son cruciales para preservar nuestro planeta.
+            </p>
+            <div class="importancia-card">
+                <div class="importancia-card-header">
+                    <span class="importancia-icon" style="font-size:3rem; background:#43a0471a; border-radius:50%; padding:18px;">🌍</span>
+                </div>
+                <div class="importancia-card-body">
+                    <h3 class="importancia-title">Preservación de la Biodiversidad</h3>
+                    <p>
+                        La Tierra alberga millones de especies de plantas y animales que dependen de ecosistemas saludables para sobrevivir. Cada especie, por pequeña que sea, juega un papel vital en el equilibrio de la naturaleza. La pérdida de biodiversidad no solo afecta a las especies en peligro de extinción, sino que también puede tener efectos cascada en todo el ecosistema.
+                    </p>
+                    <ul class="importancia-list">
+                        <li>
+                            <span class="importancia-list-icon" style="color:#43a047;">⚡</span>
+                            <strong>Conservación de Recursos Naturales</strong><br />
+                            Los recursos naturales como el agua, los bosques y los minerales son finitos. Su uso responsable garantiza su disponibilidad para las generaciones futuras.
+                        </li>
+                        <li>
+                            <span class="importancia-list-icon" style="color:#4f8cff;">☁️</span>
+                            <strong>Mitigación del Cambio Climático</strong><br />
+                            Reducir nuestra huella de carbono ayuda a combatir el calentamiento global y sus efectos devastadores como sequías, inundaciones y fenómenos meteorológicos extremos.
+                        </li>
+                        <li>
+                            <span class="importancia-list-icon" style="color:#f4b400;">😊</span>
+                            <strong>Salud y Bienestar Humano</strong><br />
+                            Un medio ambiente limpio y saludable es esencial para nuestra salud física y mental. La contaminación del aire y agua está directamente relacionada con numerosas enfermedades.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="importancia-card" style="margin-top:32px;">
+                <h3 class="importancia-title">Impacto de Nuestras Acciones Diarias</h3>
+                <p class="pequeña">
+                    Cada pequeña acción cuenta. Desde apagar las luces cuando no las necesitamos hasta reportar fugas de agua, nuestras decisiones diarias tienen un impacto acumulativo significativo en el medio ambiente.
+                </p>
+                <div class="impacto-grid">
+                    <div class="impacto-card agua">
+                        <strong>Ahorro de Agua</strong>
+                        <ul>
+                            <li>✓ Una fuga que gotea 1 vez por segundo desperdicia más de 11,000 litros de agua al año.</li>
+                            <li>✓ Reparar y reparar fugas rápidamente puede ahorrar miles de litros de agua potable.</li>
+                        </ul>
+                    </div>
+                    <div class="impacto-card energia">
+                        <strong>Eficiencia Energética</strong>
+                        <ul>
+                            <li>✓ Apagar las luces innecesarias puede reducir el consumo de energía hasta en un 20%.</li>
+                            <li>✓ Menor consumo energético significa menos emisiones de CO2 a la atmósfera.</li>
+                        </ul>
+                    </div>
+                    <div class="impacto-card residuos">
+                        <strong>Gestión de Residuos</strong>
+                        <ul>
+                            <li>✓ La separación correcta de residuos aumenta las tasas de reciclaje y reduce la contaminación.</li>
+                            <li>✓ Los residuos mal gestionados pueden contaminar suelos y aguas subterráneas.</li>
+                        </ul>
+                    </div>
+                    <div class="impacto-card calidad">
+                        <strong>Calidad Ambiental</strong>
+                        <ul>
+                            <li>✓ Reducir el ruido y la contaminación visual mejora nuestro bienestar psicológico.</li>
+                            <li>✓ Un entorno limpio y ordenado fomenta el respeto por los espacios comunes.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="importancia-card" style="margin-top:32px; text-align:center;">
+                <h3 class="main-title" style="font-size:1.4rem; color:#218838;">¡Únete al cambio!</h3>
+                <p>
+                    Tu participación en el Sistema de Reportes Verdes es fundamental para construir un campus más sostenible y respetuoso con el medio ambiente.
+                </p>
+            </div>
+        </section>
+    </main>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const toggle = document.getElementById('navbar-toggle');
+            const menu = document.getElementById('navbar-menu');
+            toggle.addEventListener('click', () => {
+                menu.classList.toggle('active');
+            });
+        });
+    </script>
+</body>
+</html>

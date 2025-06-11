@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Reportes - Sistema de Reportes Verdes</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #e8f5e9;
+            margin: 2rem;
+        }
+        h1 {
+            color: #2e7d32;
+            margin-bottom: 1rem;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 1rem;
+        }
+        th, td {
+            border: 1px solid #a5d6a7;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #43a047;
+            color: white;
+        }
+        input[type="text"] {
+            width: 90%;
+            padding: 4px;
+        }
+        button {
+            padding: 6px 12px;
+            background-color: #43a047;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            margin: 2px;
+        }
+        button:hover {
+            background-color: #388e3c;
+        }
+        .delete-btn {
+            background-color: #e53935;
+        }
+        .delete-btn:hover {
+            background-color: #c62828;
+        }
+        .logout {
+            margin-bottom: 1rem;
+            display: inline-block;
+            background-color: #c62828;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 4px;
+            text-decoration: none;
+        }
+        .logout:hover {
+            background-color: #b71c1c;
+        }
+    </style>
+</head>
+<body>
+    <a href="/logout" class="logout">Cerrar Sesión</a>
+    <h1>Lista de Reportes</h1>
+    
+    <div id="reportes-container"></div>
+
+    <table id="tabla-reportes">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Tipo</th>
+                <th>Ubicación</th>
+                <th>Descripción</th>
+                <th>Urgencia</th>
+                <th>Nombre</th>
+                <th>Correo</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Se cargan los reportes aquí -->
+        </tbody>
+    </table>
+
+    <!-- Mostrar lista rápida de reportes -->
+    <script>
+      fetch('/admin/reportes/json')
+        .then(response => response.json())
+        .then(data => {
+          const container = document.getElementById('reportes-container');
+          data.forEach(reporte => {
+            const div = document.createElement('div');
+            div.textContent = `${reporte.tipo} - ${reporte.ubicacion} - ${reporte.descripcion}`;
+            container.appendChild(div);
+          });
+        })
+        .catch(error => console.error('Error:', error));
+    </script>
+
+    <!-- Script para gestionar tabla de reportes -->
+    <script>
+        async function cargarReportes() {
+            const res = await fetch('/admin/reportes/json');
+            const reportes = await res.json();
+            const tbody = document.querySelector('#tabla-reportes tbody');
+            tbody.innerHTML = '';
+
+            reportes.forEach(r => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${r.id}</td>
+                    <td>${r.tipo}</td>
+                    <td>${r.ubicacion}</td>
+                    <td><input type="text" value="${r.descripcion}" id="desc-${r.id}" /></td>
+                    <td>${r.urgencia}</td>
+                    <td>${r.nombre || ''}</td>
+                    <td>${r.correo || ''}</td>
+                    <td>
+                        <button onclick="guardar(${r.id})">Guardar</button>
+                        <button class="delete-btn" onclick="eliminar(${r.id})">Eliminar</button>
+                        <button style="background-color:#1976d2;" onclick="marcarResuelto(${r.id})">Resuelto</button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        async function guardar(id) {
+            const input = document.getElementById(`desc-${id}`);
+            const nuevaDesc = input.value;
+
+            const res = await fetch('/admin/reportes/editar', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ id, descripcion: nuevaDesc })
+            });
+
+            if (res.ok) {
+                alert('Reporte actualizado correctamente.');
+                cargarReportes();
+            } else {
+                alert('Error al actualizar el reporte.');
+            }
+        }
+
+        async function eliminar(id) {
+            const confirmar = confirm('¿Estás seguro de que deseas eliminar este reporte?');
+            if (!confirmar) return;
+
+            const res = await fetch('/admin/reportes/eliminar', {
+                method: 'DELETE',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ id })
+            });
+
+            if (res.ok) {
+                alert('Reporte eliminado correctamente.');
+                cargarReportes();
+            } else {
+                alert('Error al eliminar el reporte.');
+            }
+        }
+
+        async function marcarResuelto(id) {
+            const res = await fetch('/admin/reportes/resuelto', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ id })
+            });
+            if (res.ok) {
+                alert('¡Reporte marcado como resuelto!');
+                cargarReportes();
+            } else {
+                alert('Error al marcar como resuelto');
+            }
+        }
+
+        // Cargar reportes al iniciar
+        cargarReportes();
+    </script>
+</body>
+</html>

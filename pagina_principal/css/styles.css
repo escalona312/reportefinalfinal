@@ -1,0 +1,499 @@
+body {
+    margin: 0;
+    font-family: 'Montserrat', Arial, sans-serif;
+    background: #f4f6f8;
+}
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #43a047;
+    padding: 16px 32px;
+    color: #fff;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    border-radius: 0 0 8px 8px;
+    position: relative;
+}
+.navbar-title {
+    display: flex;
+    align-items: center;
+    font-size: 1.3rem;
+    font-weight: bold;
+    gap: 10px;
+}
+.icon {
+    font-size: 1.5rem;
+}
+.navbar-menu {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+.navbar-menu a {
+    color: #fff;
+    text-decoration: none;
+    margin-left: 24px;
+    font-weight: 500;
+    transition: border-bottom 0.2s;
+    border-bottom: 2px solid transparent;
+    padding-bottom: 2px;
+}
+.navbar-menu a:hover, .navbar-menu a.active {
+    border-bottom: 2px solid #fff;
+}
+.navbar-toggle {
+    display: none;
+    font-size: 2rem;
+    cursor: pointer;
+    margin-right: 18px;
+    z-index: 200;
+}
+@media (max-width: 700px) {
+    .navbar-menu {
+        flex-direction: column;
+        align-items: flex-start;
+        background: #43a047;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        width: 100%;
+        padding: 12px 0;
+        display: none;
+        z-index: 100;
+    }
+    .navbar-menu.active {
+        display: flex;
+    }
+    .navbar-toggle {
+        display: block;
+    }
+}
+
+.main-content {
+    background: #f1faee;
+    margin: 0 auto;
+    padding: 32px 0 0 0;
+    max-width: 1400px;
+    min-height: 80vh;
+    border-radius: 0 0 8px 8px;
+}
+.main-title {
+    text-align: center;
+    color: #218838;
+    font-size: 2.3rem;
+    margin-bottom: 12px;
+    font-weight: bold;
+}
+.main-description {
+    text-align: center;
+    color: #444;
+    font-size: 1.15rem;
+    margin-bottom: 32px;
+}
+.report-cards {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    flex-wrap: wrap;
+    margin-bottom: 32px;
+}
+.report-card {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(60,60,60,0.08);
+    padding: 32px 24px 24px 24px;
+    width: 270px;
+    min-height: 220px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    border-top: 6px solid #eee;
+    transition: transform 0.15s, box-shadow 0.15s;
+}
+.report-card:hover {
+    transform: translateY(-6px) scale(1.03);
+    box-shadow: 0 8px 24px rgba(60,60,60,0.13);
+}
+.card-icon {
+    background: #f1f6fd;
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    margin-bottom: 18px;
+}
+.card-water { border-top: 6px solid #3498db; }
+.card-light { border-top: 6px solid #f1c40f; }
+.card-trash { border-top: 6px solid #e74c3c; }
+.card-noise { border-top: 6px solid #a259f7; }
+.report-card h2 {
+    font-size: 1.2rem;
+    margin: 0 0 8px 0;
+    font-weight: bold;
+    color: #222;
+}
+.report-card p {
+    color: #444;
+    font-size: 1rem;
+    margin: 0;
+}
+.center-btn {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 32px;
+}
+.report-btn {
+    background: #219653;
+    color: #fff;
+    border: none;
+    border-radius: 24px;
+    padding: 14px 38px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(60,60,60,0.08);
+    transition: background 0.2s, transform 0.15s;
+}
+.report-btn:hover {
+    background: #176c3a;
+    transform: scale(1.04);
+}
+
+/* Formulario de reporte */
+.report-form {
+    background: #fff;
+    max-width: 600px;
+    margin: 40px auto 0 auto;
+    padding: 32px 32px 24px 32px;
+    border-radius: 10px;
+    box-shadow: 0 4px 16px rgba(60,60,60,0.10);
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+.form-title {
+    text-align: center;
+    color: #218838;
+    font-size: 1.7rem;
+    margin-bottom: 18px;
+    font-weight: bold;
+}
+.report-form label {
+    font-weight: 500;
+    margin-bottom: 4px;
+    color: #222;
+}
+.report-form input[type="text"],
+.report-form input[type="email"],
+.report-form select,
+.report-form textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1.5px solid #d1e7dd;
+    border-radius: 6px;
+    font-size: 1rem;
+    margin-bottom: 8px;
+    background: #f8fafc;
+    transition: border 0.2s;
+}
+.report-form input[type="text"]:focus,
+.report-form input[type="email"]:focus,
+.report-form select:focus,
+.report-form textarea:focus {
+    border: 1.5px solid #43a047;
+    outline: none;
+}
+.urgency-group {
+    display: flex;
+    gap: 18px;
+    margin-bottom: 8px;
+}
+.contact-group {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 8px;
+}
+@media (max-width: 600px) {
+    .report-form {
+        padding: 18px 6px;
+    }
+    .contact-group {
+        flex-direction: column;
+        gap: 6px;
+    }
+}
+
+/* Importancia Section */
+.importancia-section {
+    max-width: 900px;
+    margin: 0 auto 40px auto;
+}
+.importancia-card {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(60,60,60,0.10);
+    margin: 0 auto 24px auto;
+    padding: 0;
+    overflow: hidden;
+}
+.importancia-card-header {
+    background: #43a047;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 36px 0 24px 0;
+}
+.importancia-icon {
+    font-size: 3rem;
+    color: #218838;
+}
+.importancia-card-body {
+    padding: 28px 32px 24px 32px;
+}
+.importancia-title {
+    color: #218838;
+    font-size: 1.3rem;
+    font-weight: bold;
+    margin-bottom: 12px;
+    display: flex;
+    text-align: center;
+}
+.importancia-list {
+    list-style: none;
+    padding: 0;
+    margin: 18px 0 0 0;
+    text-align: center;
+}
+.importancia-list li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+    font-size: 1rem;
+}
+.importancia-list-icon {
+    font-size: 1.4rem;
+    margin-top: 2px;
+}
+@media (max-width: 700px) {
+    .importancia-card-body {
+        padding: 16px 10px 16px 10px;
+    }
+    .importancia-section {
+        padding: 0 6px;
+    }
+}
+
+/* Impacto Grid */
+.impacto-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+    margin-top: 18px;
+}
+.pequeña{
+    display: flex;
+    text-align: center;
+}
+.impacto-card {
+    background: #f8fff9;
+    border-radius: 8px;
+    border: 2px solid #e0f2e9;
+    padding: 16px 18px 10px 18px;
+    font-size: 1rem;
+    box-sizing: border-box;
+    min-height: 120px;
+    display: flex;
+    margin: 10px;
+}
+.impacto-card.agua {
+    border-color: #aee9d1;
+    background: #f4fffa;
+}
+.impacto-card.energia {
+    border-color: #ffe59d;
+    background: #fffdf4;
+}
+.impacto-card.residuos {
+    border-color: #ffbdbd;
+    background: #fff6f6;
+}
+.impacto-card.calidad {
+    border-color: #e3d1ff;
+    background: #faf7ff;
+}
+.impacto-card strong {
+    color: #218838;
+    font-weight: bold;
+    display: block;
+    margin-bottom: 6px;
+}
+.impacto-card.residuos strong {
+    color: #d32f2f;
+}
+.impacto-card.energia strong {
+    color: #e6a100;
+}
+.impacto-card.calidad strong {
+    color: #7c4dff;
+}
+.impacto-card ul {
+    margin: 0;
+    padding-left: 18px;
+}
+.impacto-card li {
+    margin-bottom: 6px;
+    color: #444;
+    font-size: 0.97rem;
+}
+@media (max-width: 700px) {
+    .impacto-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Estadísticas Section */
+.estadisticas-section {
+    max-width: 900px;
+    margin: 0 auto 40px auto;
+}
+.estadisticas-leyenda {
+    display: flex;
+    justify-content: space-around;
+    margin: 10px 0 0 0;
+    color: #666;
+    font-size: 1rem;
+}
+.tabla-reportes {
+    margin-top: 18px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(60,60,60,0.08);
+    overflow-x: auto;
+}
+.tabla-reportes table {
+    width: 100%;
+    border-collapse: collapse;
+}
+.tabla-reportes th {
+    background: #e0f2e9;
+    color: #218838;
+    padding: 10px 8px;
+    text-align: left;
+    font-size: 1rem;
+}
+.tabla-reportes td {
+    padding: 8px 8px;
+    border-bottom: 1px solid #f0f0f0;
+    font-size: 0.98rem;
+}
+.estado {
+    padding: 2px 12px;
+    border-radius: 12px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    display: inline-block;
+}
+.estado.resuelto {
+    background: #e0f7e9;
+    color: #218838;
+    border: 1px solid #43a04733;
+}
+.estado.proceso {
+    background: #fff8e1;
+    color: #bfa100;
+    border: 1px solid #ffe59d;
+}
+
+/* Footer */
+.footer {
+    background: #22663a;
+    color: #fff;
+    padding: 22px 0 10px 0;
+    margin-top: 40px;
+}
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 32px;
+}
+.footer-social {
+    display: flex;
+    gap: 18px;
+}
+.social-icon {
+    width: 22px;
+    height: 22px;
+    filter: invert(1);
+    opacity: 0.8;
+    transition: opacity 0.2s;
+}
+.social-icon:hover {
+    opacity: 1;
+}
+@media (max-width: 700px) {
+    .footer-content {
+        flex-direction: column;
+        gap: 12px;
+        align-items: flex-start;
+    }
+}
+/* Responsividad adicional para móviles pequeños */
+@media (max-width: 450px) {
+    .navbar {
+        padding: 12px 16px;
+    }
+    .navbar-title {
+        font-size: 1rem;
+    }
+    .main-title {
+        font-size: 1.6rem;
+    }
+    .main-description {
+        font-size: 1rem;
+    }
+    .report-card {
+        width: 90%;
+        padding: 24px 16px;
+    }
+    .card-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 1.6rem;
+    }
+    .report-btn {
+        padding: 10px 24px;
+        font-size: 1rem;
+    }
+    .form-title {
+        font-size: 1.5rem;
+    }
+    .impacto-card {
+        font-size: 0.95rem;
+        padding: 12px;
+    }
+    .impacto-card ul {
+        padding-left: 14px;
+    }
+    .impacto-card li {
+        font-size: 0.9rem;
+    }
+    .estadisticas-leyenda {
+        flex-direction: column;
+        font-size: 0.95rem;
+        gap: 6px;
+        text-align: center;
+    }
+    .footer-content {
+        padding: 0 16px;
+    }
+    .footer-social {
+        gap: 12px;
+    }
+}

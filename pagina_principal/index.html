@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <header class="navbar">
+        <div class="navbar-title">
+            <span class="icon">🤍</span>
+            <span><strong>Sistema de Reportes Verdes</strong></span>
+        </div>
+        <span class="navbar-toggle" id="navbar-toggle">&#9776;</span>
+        <nav class="navbar-menu" id="navbar-menu">
+            <a href="index.html">Inicio</a>
+            <a href="reporte.html">Reportar</a>
+            <a href="estadisticas.html">Estadísticas</a>
+            <a href="importancia.html">Importancia</a>
+        </nav>
+    </header>
+    <main class="main-content">
+        <h1 class="main-title">Bienvenido al Sistema de Reportes Verdes</h1>
+        <p class="main-description">
+            Ayúdanos a mantener nuestro campus sostenible reportando problemas ambientales. Juntos podemos crear un entorno más limpio y saludable para todos.
+        </p>
+        <section class="report-cards">
+            <div class="report-card card-water">
+                <div class="card-icon">⬇️</div>
+                <h2>Fugas de Agua</h2>
+                <p>Reporta cualquier fuga de agua en baños, bebederos o sistemas de riego.</p>
+            </div>
+            <div class="report-card card-light">
+                <div class="card-icon">💡</div>
+                <h2>Luces Encendidas</h2>
+                <p>Informa sobre luces que permanecen encendidas innecesariamente en aulas o pasillos.</p>
+            </div>
+            <div class="report-card card-trash">
+                <div class="card-icon">🗑️</div>
+                <h2>Basura Mal Dispuesta</h2>
+                <p>Reporta contenedores desbordados o basura fuera de los lugares designados.</p>
+            </div>
+            <div class="report-card card-noise">
+                <div class="card-icon">🔊</div>
+                <h2>Ruido y Contaminación Visual</h2>
+                <p>Informa sobre ruidos excesivos o elementos que afecten la estética del campus.</p>
+            </div>
+        </section>
+        <div class="center-btn">
+            <a href="reporte.html">
+                <button class="report-btn" type="button">Crear un Reporte</button>
+            </a>
+        </div>
+    </main>
+    <script>
+        const toggle = document.getElementById('navbar-toggle');
+        const menu = document.getElementById('navbar-menu');
+        toggle.addEventListener('click', () => {
+            menu.classList.toggle('active');
+        });
+    </script>
+</body>
+</html>

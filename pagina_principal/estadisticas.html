@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Estadísticas - Reportes Verdes</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f3f4f6;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background-color: #2e7d32;
+      color: white;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin-left: 20px;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    main {
+      padding: 20px;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    h2 {
+      color: #2e7d32;
+      margin-bottom: 20px;
+    }
+
+    canvas {
+      background-color: white;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+
+    .cards {
+      margin-top: 30px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background-color: white;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .card h3 {
+      margin-top: 0;
+      color: #388e3c;
+    }
+
+    footer {
+      text-align: center;
+      padding: 15px;
+      background-color: #2e7d32;
+      color: white;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Reportes Verdes</h1>
+    <nav>
+      <a href="index.html">Inicio</a>
+      <a href="reporte.html">Reportar</a>
+      <a href="estadisticas.html">Estadísticas</a>
+      <a href="importancia.html">Importancia</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>📊 Estadísticas de Reportes Ambientales</h2>
+    <canvas id="graficoReportes" width="400" height="200"></canvas>
+
+    <h2>📝 Reportes Recientes</h2>
+    <div class="cards" id="contenedorReportes">
+      <!-- Tarjetas generadas con JavaScript -->
+    </div>
+  </main>
+
+  <footer>
+    © 2025 Sistema de Reportes Verdes
+  </footer>
+
+<script>
+  async function cargarReportes() {
+    try {
+      const response = await fetch('/reportes/json');
+      if (!response.ok) throw new Error('Error al cargar reportes');
+      const reportes = await response.json();
+
+      // Contar tipos (ajusta según valores en tu BD)
+      const conteoTipos = {
+        'agua': 0,
+        'luz': 0,
+        'basura': 0,
+        'ruido': 0,
+        'otros': 0
+      };
+
+      // Asume que el campo tipo en BD guarda esos valores: 'agua', 'luz', etc.
+      reportes.forEach(r => {
+        if (conteoTipos[r.tipo] !== undefined) {
+          conteoTipos[r.tipo]++;
+        } else {
+          conteoTipos['otros']++;
+        }
+      });
+
+      // Actualiza gráfico
+      const ctx = document.getElementById('graficoReportes').getContext('2d');
+      new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: ['Fugas de Agua', 'Luces Encendidas', 'Basura Mal Dispuesta', 'Ruido y Contaminación Visual', 'Otros'],
+          datasets: [{
+            label: 'Cantidad de reportes',
+            data: [
+              conteoTipos['agua'],
+              conteoTipos['luz'],
+              conteoTipos['basura'],
+              conteoTipos['ruido'],
+              conteoTipos['otros']
+            ],
+            backgroundColor: ['#4caf50', '#2196f3', '#ff9800', '#9c27b0', '#9e9e9e'],
+            borderRadius: 10
+          }]
+        },
+        options: {
+          plugins: { legend: { display: false } },
+          scales: { y: { beginAtZero: true, ticks: { stepSize: 1 } } }
+        }
+      });
+
+      // Mostrar tarjetas
+      const contenedor = document.getElementById('contenedorReportes');
+      contenedor.innerHTML = ''; // limpiar
+      reportes.slice().reverse().forEach(rep => {
+        contenedor.innerHTML += `
+          <div class="card">
+            <h3>${mapTipo(rep.tipo)}</h3>
+            <p><strong>Ubicación:</strong> ${rep.ubicacion}</p>
+            <p><strong>Fecha:</strong> ${new Date(rep.fecha || rep.created_at).toLocaleDateString('es-ES')}</p>
+            <p><strong>Estado:</strong> ${rep.estado === 'Resuelto' ? 'Resuelto' : 'Pendiente'}</p>
+          </div>
+        `;
+      });
+
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  // Función para mapear código a texto legible
+  function mapTipo(tipo) {
+    switch(tipo) {
+      case 'agua': return 'Fugas de Agua';
+      case 'luz': return 'Luces Encendidas';
+      case 'basura': return 'Basura Mal Dispuesta';
+      case 'ruido': return 'Ruido y Contaminación Visual';
+      default: return 'Otros';
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', cargarReportes);
+</script>
+
+
+</body>
+</html>

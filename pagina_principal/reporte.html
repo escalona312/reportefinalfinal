@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Nuevo Reporte</title>
+    <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+    <header class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-title">
+                <span class="icon">🤍</span>
+                <span><strong>Sistema de Reportes Verdes</strong></span>
+            </div>
+            <span class="navbar-toggle" id="navbar-toggle">&#9776;</span>
+        </div>
+        <nav class="navbar-menu" id="navbar-menu">
+            <a href="index.html">Inicio</a>
+            <a href="reporte.html">Reportar</a>
+            <a href="estadisticas.html">Estadísticas</a>
+            <a href="importancia.html">Importancia</a>
+        </nav>
+    </header>
+    <main class="main-content">
+        <form class="report-form" action="/guardar_reporte" method="POST">
+            <h2 class="form-title">Crear Nuevo Reporte</h2>
+            <label for="tipo">Tipo de Problema</label>
+            <select id="tipo" name="tipo" required>
+                <option value="">Selecciona un tipo de problema</option>
+                <option value="agua">Fugas de Agua</option>
+                <option value="luz">Luces Encendidas</option>
+                <option value="basura">Basura Mal Dispuesta</option>
+                <option value="ruido">Ruido y Contaminación Visual</option>
+            </select>
+            <label for="ubicacion">Ubicación</label>
+            <input type="text" id="ubicacion" name="ubicacion" placeholder="Ej: Edificio A, Piso 2, Aula 201" required />
+            <label for="descripcion">Descripción del Problema</label>
+            <textarea id="descripcion" name="descripcion" rows="4" placeholder="Describe el problema con detalle" required></textarea>
+            <label>Nivel de Urgencia</label>
+            <div class="urgency-group">
+                <label><input type="radio" name="urgencia" value="baja" required /> Baja</label>
+                <label><input type="radio" name="urgencia" value="media" /> Media</label>
+                <label><input type="radio" name="urgencia" value="alta" /> Alta</label>
+            </div>
+            <label>Información de Contacto (opcional)</label>
+            <div class="contact-group">
+                <input type="text" name="nombre" placeholder="Nombre" />
+                <input type="email" name="correo" placeholder="Correo electrónico" />
+            </div>
+            <div class="center-btn">
+                <button type="submit" class="report-btn">Enviar Reporte</button>
+            </div>
+        </form>
+    </main>
+    <footer class="footer">
+        <div class="footer-content">
+            <div>
+                <strong>Sistema de Reportes Verdes</strong>
+                <div>Juntos por un campus más sostenible</div>
+            </div>
+            <div class="footer-social">
+                <a href="#"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/facebook.svg" alt="Facebook" class="social-icon" /></a>
+                <a href="#"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/instagram.svg" alt="Instagram" class="social-icon" /></a>
+                <a href="#"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/twitter.svg" alt="Twitter" class="social-icon" /></a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const toggle = document.getElementById('navbar-toggle');
+        const menu = document.getElementById('navbar-menu');
+        toggle.addEventListener('click', () => {
+          menu.classList.toggle('active');
+        });
+      });
+    </script>
+</body>
+</html>
